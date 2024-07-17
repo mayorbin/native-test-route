@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>hash路由实现</title>
+  </head>
+  <body>
+    <ul>
+      <li>
+        <a href="#/home">首页</a>
+      </li>
+      <li>
+        <a href="#/about">关于</a>
+      </li>
+    </ul>
+
+    <div id="route-view"></div>
+  </body>
+</html>
+
+<script>
+  // 设置路由映射
+  const routes = [
+    {
+      path: '#/home',
+      component: '<h1>这是首页</h1>'
+    },
+    {
+      path: '#/about',
+      component: '<h1>这是关于页</h1>'
+    }
+  ]
+  // 获取内容标签
+  const routeView = document.getElementById('route-view')
+
+  function onHashChange(e) {
+    routes.forEach(route => {
+      if (route.path === location.hash) routeView.innerHTML = route.component
+    })
+  }
+
+  // dom加载完成后也要去匹配
+  window.addEventListener('DOMContentLoaded', onHashChange)
+  // hash改变后去匹配需要加载的内容
+  window.addEventListener('hashchange', onHashChange)
+</script>
